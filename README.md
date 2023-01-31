@@ -1,6 +1,6 @@
 # Regex AI
 
-Regex AI is a tool for generating Regex patterns from natural language. To get started try entering a prompt as shown below!
+Regex AI is a tool for generating Regex patterns from natural language built on GPT3. To get started try entering a prompt as shown below!
 
 ![Snag_c78ee](https://user-images.githubusercontent.com/61338150/215813614-a26c376a-64bd-4df8-b05c-4f7392505241.png)
 
