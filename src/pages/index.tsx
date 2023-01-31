@@ -1,13 +1,14 @@
 import { type NextPage } from "next";
 import Head from "next/head";
-//import Link from "next/link";
+import Link from "next/link";
 import { useState } from "react";
 
 import { api } from "../utils/api";
 
 const Home: NextPage = () => {
   const [value, setValue] = useState<string>("");
-  const [response, setResponse] = useState<string>("Click button to generate Regex")
+  const [noResponse, setNoResponse] = useState(true);
+  const [response, setResponse] = useState<string>("Enter a prompt to generate Regex")
   const { refetch } = api.generate.generate.useQuery(
     {
       prompt: value
@@ -26,6 +27,7 @@ const Home: NextPage = () => {
         setResponse(text);
       }
     });
+    setNoResponse(false);
   };
 
   return (
@@ -63,11 +65,14 @@ const Home: NextPage = () => {
               <p className="text-lg md:text-2xl text-white mr-3">
                 {response}
               </p>
-              <button onClick={() => void navigator.clipboard.writeText(response)}
-                      className="bg-[hsl(280,100%,70%)] hover:bg-purple-300 text-white font-medium py-2 px-3 rounded-full">
-                📋
-              </button>
+              {!noResponse &&
+                <button onClick={() => void navigator.clipboard.writeText(response)}
+                        className="bg-[hsl(280,100%,70%)] hover:bg-purple-300 text-white font-medium py-2 px-3 rounded-full">
+                  📋
+                </button>
+              }
             </div>
+            <Link className="text-white underline" href={"https://github.com/emcdaniel1624/ai-regex-generator"}>Source Code</Link>
         </div>
       </main>
     </>
