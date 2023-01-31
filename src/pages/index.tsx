@@ -56,7 +56,7 @@ const Home: NextPage = () => {
                       onChange={(event) => setValue(event.target.value)}
                   />
               </div>
-              <button className="bg-[hsl(280,100%,70%)] hover:bg-purple-300 text-white font-medium py-2 px-4 rounded-full">
+              <button className="bg-[hsl(280,100%,70%)] hover:bg-purple-500 text-white font-medium py-2 px-4 rounded-full transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105 active:scale-100 active:translate-y-1">
                   Generate
               </button>
             </form>
@@ -67,7 +67,7 @@ const Home: NextPage = () => {
               </p>
               {!noResponse &&
                 <button onClick={() => void navigator.clipboard.writeText(response)}
-                        className="bg-[hsl(280,100%,70%)] hover:bg-purple-300 text-white font-medium py-2 px-3 rounded-full">
+                        className="md:bg-[hsl(280,100%,70%)] hover:bg-purple-300 text-white font-medium py-2 px-3 rounded-full">
                   📋
                 </button>
               }
