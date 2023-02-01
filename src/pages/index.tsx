@@ -54,6 +54,7 @@ const Home: NextPage = () => {
                       id="value"
                       value={value}
                       onChange={(event) => setValue(event.target.value)}
+                      placeholder="Removes all white space from a string"
                   />
               </div>
               <button className="bg-[hsl(280,100%,70%)] hover:bg-purple-500 text-white font-medium py-2 px-4 rounded-full transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105 active:scale-100 active:translate-y-1">
