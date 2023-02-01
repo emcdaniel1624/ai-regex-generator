@@ -42,7 +42,7 @@ const Home: NextPage = () => {
           <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
             Regex<span className="text-[hsl(280,100%,70%)]">.AI</span>
           </h1>
-          <div className="flex flex-col items-center justify-center">
+          <div className="flex flex-col items-center gap-3 justify-center">
             <p className="text-lg md:text-2xl text-white mb-3">
               Generate Regular Expressions From Words
             </p>
@@ -64,19 +64,19 @@ const Home: NextPage = () => {
                   Generate
               </button>
             </form>
-          </div>
-            <div className="flex">
-              <p className="text-lg md:text-2xl text-white mr-3">
-                {response}
-              </p>
-              {!noResponse &&
+            {!noResponse &&
+              <div className="flex w-[320px] md:w-[480px]">
+                <div className="flex-grow border border-gray-400 px-4 pt-2 pb-2 md:pb-3 text-lg md:text-2xl text-white mr-3">
+                  {response}
+                </div>
                 <button onClick={() => void navigator.clipboard.writeText(response)}
-                        className="md:bg-[hsl(280,100%,70%)] hover:bg-purple-300 text-white font-medium py-2 px-3 rounded-full">
-                  📋
+                        className="hover:underline text-white font-medium py-2 px-3 rounded-full transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110 active:scale-100">
+                  Copy
                 </button>
-              }
-            </div>
-            <Link className="text-white underline" href={"https://github.com/emcdaniel1624/ai-regex-generator"}>Source Code</Link>
+              </div>
+            }
+          </div>
+          <Link className="text-white underline" href={"https://github.com/emcdaniel1624/ai-regex-generator"}>Source Code</Link>
         </div>
       </main>
     </>
