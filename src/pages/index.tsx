@@ -2,14 +2,13 @@ import { type NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import { useState } from "react";
-
 import { api } from "../utils/api";
 
 const Home: NextPage = () => {
   const [value, setValue] = useState<string>("");
   const [noResponse, setNoResponse] = useState(true);
   const [response, setResponse] = useState<string>("")
-  const { refetch } = api.regex.generate.useQuery(
+  const {refetch:generateRefetch} = api.regex.generate.useQuery(
     {
       prompt: value
     },
@@ -17,10 +16,10 @@ const Home: NextPage = () => {
       enabled: false
     }
   );
-  //const test = 'emcdaniel1624@gmail.com';
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    await refetch().then((data) => {
+    await generateRefetch().then((data) => {
       const text = data.data?.response;
       if (typeof text === 'string') {
         console.log('Regex', text);

@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client";
-import { TypeOf, z } from "zod";
+import type { TypeOf} from "zod";
+import { z } from "zod";
 import { env } from "../env/server.mjs";
 
 const globalForPrisma = globalThis as unknown as { prisma: PrismaClient };
