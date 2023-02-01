@@ -9,7 +9,7 @@ const Home: NextPage = () => {
   const [value, setValue] = useState<string>("");
   const [noResponse, setNoResponse] = useState(true);
   const [response, setResponse] = useState<string>("")
-  const { refetch } = api.generate.generate.useQuery(
+  const { refetch } = api.regex.generate.useQuery(
     {
       prompt: value
     },
