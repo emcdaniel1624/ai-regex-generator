@@ -45,13 +45,13 @@ const Home: NextPage = () => {
             <p className="text-lg md:text-2xl text-white mb-3">
               Generate Regular Expressions From Words
             </p>
-            <form onSubmit={(event) => {void handleSubmit(event)}} className="bg-white p-6 w-[320px] md:w-[480px] rounded-lg shadow-md flex flex-col items-center justify-center">
+            <form onSubmit={(event) => {void handleSubmit(event)}} className="bg-white p-6 w-[320px] md:w-[480px] rounded-md shadow-md flex flex-col items-center justify-center">
               <div className="mb-4 w-[100%]">
                   <label className="block text-gray-700 font-medium mb-2" htmlFor="value">
                       Generate a Regex that...
                   </label>
                   <input
-                      className="border border-gray-400 p-2 w-full"
+                      className="border border-gray-400 p-2 w-full rounded-md"
                       type="text"
                       id="value"
                       value={value}
@@ -64,14 +64,20 @@ const Home: NextPage = () => {
               </button>
             </form>
             {!noResponse &&
-              <div className="flex w-[320px] md:w-[480px]">
-                <div className="flex-grow border border-gray-400 px-4 pt-2 pb-2 md:pb-3 text-lg md:text-2xl text-white mr-3">
+              <div className="flex flex-col md:flex-row items-center w-[320px] md:w-[480px]">
+                <div className="w-full text-center md:text-left md:flex-grow border border-gray-400 rounded-md px-4 pt-2 pb-2 md:pb-3 text-lg md:text-2xl text-white">
                   {response}
                 </div>
-                <button onClick={() => void navigator.clipboard.writeText(response)}
-                        className="hover:underline text-white font-medium py-2 px-3 rounded-full transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110 active:scale-100">
-                  Copy
-                </button>
+                <div className="flex">
+                  <button onClick={() => void navigator.clipboard.writeText(response)}
+                          className="hover:underline text-white font-medium py-2 px-3 rounded-full transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110 active:scale-100">
+                    Copy
+                  </button>
+                  {/* <button onClick={() => void navigator.clipboard.writeText(response)}
+                          className="hover:underline text-white font-medium py-2 px-3 rounded-full transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110 active:scale-100">
+                    Save
+                  </button> */}
+                </div>
               </div>
             }
           </div>
