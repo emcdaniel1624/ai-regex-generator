@@ -46,7 +46,7 @@ const Home: NextPage = () => {
             <form onSubmit={(event) => {void handleSubmit(event)}} className="bg-white p-6 w-[320px] md:w-[480px] rounded-lg shadow-md flex flex-col items-center justify-center">
               <div className="mb-4 w-[100%]">
                   <label className="block text-gray-700 font-medium mb-2" htmlFor="value">
-                      Generate a Regex that matches...
+                      Generate a Regex that...
                   </label>
                   <input
                       className="border border-gray-400 p-2 w-full"

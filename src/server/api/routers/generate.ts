@@ -1,5 +1,5 @@
 import { z } from "zod";
-import openai from "../../openai";
+import openai from "../../../utils/openai";
 import { createTRPCRouter, publicProcedure } from "../trpc";
 
 export const generateRouter = createTRPCRouter({
@@ -20,7 +20,7 @@ const generateRegex = async (promptText: string) => {
       model: "text-davinci-003",
       prompt: `
       Generate a regex pattern with the following requirements.
-      Requirements: A regex that matches "${promptText}"
+      Requirements: A regex that "${promptText}"
       Result:`,
       max_tokens: 150,
       temperature: 0,
