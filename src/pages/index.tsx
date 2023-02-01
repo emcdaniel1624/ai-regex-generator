@@ -8,7 +8,7 @@ import { api } from "../utils/api";
 const Home: NextPage = () => {
   const [value, setValue] = useState<string>("");
   const [noResponse, setNoResponse] = useState(true);
-  const [response, setResponse] = useState<string>("Enter a prompt to generate a Regex")
+  const [response, setResponse] = useState<string>("")
   const { refetch } = api.generate.generate.useQuery(
     {
       prompt: value
@@ -37,12 +37,15 @@ const Home: NextPage = () => {
         <meta name="description" content="Regex generator built with GPT3" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="h-screen flex flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c]">
-        <div className="container flex flex-col items-center justify-center gap-8 px-4 py-16">
+      <main className="h-screen flex flex-col items-center bg-gradient-to-b from-[#2e026d] to-[#15162c]">
+        <div className="container flex flex-col items-center justify-center gap-4 md:gap-8 px-4 pt-36 md:pt-16">
           <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
             Regex<span className="text-[hsl(280,100%,70%)]">.AI</span>
           </h1>
           <div className="flex flex-col items-center justify-center">
+            <p className="text-lg md:text-2xl text-white mb-3">
+              Generate Regular Expressions From Words
+            </p>
             <form onSubmit={(event) => {void handleSubmit(event)}} className="bg-white p-6 w-[320px] md:w-[480px] rounded-lg shadow-md flex flex-col items-center justify-center">
               <div className="mb-4 w-[100%]">
                   <label className="block text-gray-700 font-medium mb-2" htmlFor="value">
@@ -57,7 +60,7 @@ const Home: NextPage = () => {
                       placeholder="Removes all white space from a string"
                   />
               </div>
-              <button className="bg-[hsl(280,100%,70%)] hover:bg-purple-500 text-white font-medium py-2 px-4 rounded-full transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105 active:scale-100 active:translate-y-1">
+              <button className="bg-[hsl(280,100%,70%)] hover:bg-purple-500 text-white font-medium py-2 px-4 rounded-full transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105 active:scale-100">
                   Generate
               </button>
             </form>
