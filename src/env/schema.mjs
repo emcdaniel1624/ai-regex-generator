@@ -6,7 +6,8 @@ import { z } from "zod";
  * This way you can ensure the app isn't built with invalid env vars.
  */
 export const serverSchema = z.object({
-  DATABASE_URL: z.string(),
+  DATABASE_URL: z.string().url(),
+  SHADOW_DATABASE_URL: z.string().url(),
   OPENAI_KEY: z.string(),
   NODE_ENV: z.enum(["development", "test", "production"]),
 });
@@ -18,6 +19,7 @@ export const serverSchema = z.object({
  */
 export const serverEnv = {
   DATABASE_URL: process.env.DATABASE_URL,
+  SHADOW_DATABASE_URL: process.env.SHADOW_DATABASE_URL,
   OPENAI_KEY: process.env.OPENAI_KEY,
   NODE_ENV: process.env.NODE_ENV,
 };
