@@ -2,7 +2,7 @@
 
 Regex AI is a tool for generating Regex patterns from natural language built on GPT3. To get started visit https://regexai.vercel.app and try entering a prompt as shown below!
 
-![Snag_50b4b4](https://user-images.githubusercontent.com/61338150/215834794-51a17598-ba4f-4b8e-b3e8-0f6b2df6447d.png)
+<img width="1280" alt="Snag_43317e0" src="https://user-images.githubusercontent.com/61338150/216146810-128e3ff2-768f-4597-a7df-2f399ae7ab91.png">
 
 ## Technologies
 
