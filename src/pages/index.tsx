@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import { type NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
@@ -7,8 +8,10 @@ import { api } from "../utils/api";
 const Home: NextPage = () => {
   const [value, setValue] = useState<string>("");
   const [noResponse, setNoResponse] = useState(true);
-  const [response, setResponse] = useState<string>("")
-  const {refetch:generateRefetch} = api.regex.generate.useQuery(
+  const [hasFeedback, setHasFeedback] = useState<boolean>();
+  const [response, setResponse] = useState<string>("");
+  const [responseId, setResonseId] = useState<string>("");
+  const {refetch:generateRegex} = api.regex.generate.useQuery(
     {
       prompt: value
     },
@@ -16,18 +19,26 @@ const Home: NextPage = () => {
       enabled: false
     }
   );
+  const updateFeedback = api.regex.feedback.useMutation();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    await generateRefetch().then((data) => {
-      const text = data.data?.response;
-      if (typeof text === 'string') {
-        console.log('Regex', text);
-        setResponse(text);
+    await generateRegex().then((data) => {
+      const dataObj = data.data;
+      if (typeof dataObj === 'object') {
+        console.log('Regex', dataObj);
+        setResponse(dataObj.response);
+        setResonseId(dataObj.id);
       }
     });
+    setHasFeedback(false);
     setNoResponse(false);
   };
+
+  const handleFeedback = (feedback: boolean) => {
+    setHasFeedback(true);
+    updateFeedback.mutate({id:responseId, feedback:feedback});
+  }
 
   return (
     <>
@@ -47,11 +58,11 @@ const Home: NextPage = () => {
             </p>
             <form onSubmit={(event) => {void handleSubmit(event)}} className="bg-white p-6 w-[320px] md:w-[480px] rounded-md shadow-md flex flex-col items-center justify-center">
               <div className="mb-4 w-[100%]">
-                  <label className="block text-gray-700 font-medium mb-2" htmlFor="value">
+                  <label className="block text-[#2e026d] font-medium mb-2" htmlFor="value">
                       Generate a Regex that...
                   </label>
                   <input
-                      className="border border-gray-400 p-2 w-full rounded-md"
+                      className="border border-[#2e026d] active:border[#2e026d] p-2 w-full rounded-md"
                       type="text"
                       id="value"
                       value={value}
@@ -59,25 +70,46 @@ const Home: NextPage = () => {
                       placeholder="Removes all white space from a string"
                   />
               </div>
-              <button className="bg-[hsl(280,100%,70%)] hover:bg-purple-500 text-white font-medium py-2 px-4 rounded-full transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105 active:scale-100">
+              <button className="bg-[hsl(280,100%,70%)] hover:bg-purple-700 text-white font-medium py-2 px-4 rounded-full transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105 active:scale-100">
                   Generate
               </button>
             </form>
             {!noResponse &&
-              <div className="flex flex-col md:flex-row items-center w-[320px] md:w-[480px]">
-                <div className="w-full text-center md:text-left md:flex-grow border border-gray-400 rounded-md px-4 pt-2 pb-2 md:pb-3 text-lg md:text-2xl text-white">
-                  {response}
+              <div className="flex flex-col items-center w-[320px] md:w-[480px]">
+                <div className="flex w-full">
+                  <div className="w-full text-center md:text-left md:flex-grow border border-gray-400 rounded-md px-4 pt-2 pb-2 md:pb-3 text-lg md:text-2xl text-white">
+                    {response}
+                  </div>
+                  <div className="flex">
+                    <button onClick={() => void navigator.clipboard.writeText(response)}
+                            className="hover:underline text-white font-medium py-2 px-3 rounded-full transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110 active:scale-100">
+                      Copy
+                    </button>
+                    {/* <button onClick={() => void navigator.clipboard.writeText(response)}
+                            className="hover:underline text-white font-medium py-2 px-3 rounded-full transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110 active:scale-100">
+                      Save
+                    </button> */}
+                  </div>
                 </div>
-                <div className="flex">
-                  <button onClick={() => void navigator.clipboard.writeText(response)}
-                          className="hover:underline text-white font-medium py-2 px-3 rounded-full transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110 active:scale-100">
-                    Copy
-                  </button>
-                  {/* <button onClick={() => void navigator.clipboard.writeText(response)}
-                          className="hover:underline text-white font-medium py-2 px-3 rounded-full transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110 active:scale-100">
-                    Save
-                  </button> */}
-                </div>
+                {hasFeedback ?
+                  <p className="text-white mt-3">
+                    Thanks for the feedback!
+                  </p>
+                  :
+                  <div className="flex gap-3 mt-3">
+                    <div className="text-white">
+                      Was this response helpful?
+                    </div>
+                    <button onClick={() => void handleFeedback(true)}
+                            className="hover:underline text-white rounded-full transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110 active:scale-100">
+                      Yes
+                    </button>
+                    <button onClick={() => void handleFeedback(false)}
+                            className="hover:underline text-white rounded-full transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110 active:scale-100">
+                      No
+                    </button>
+                  </div>
+                }
               </div>
             }
           </div>

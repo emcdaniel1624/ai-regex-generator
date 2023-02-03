@@ -13,7 +13,6 @@ export const prisma =
   });
 
 if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
-
 export const createRequestSchema = z.object({
   prompt: z.string({
     required_error: 'Prompt is required',
