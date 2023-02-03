@@ -4,6 +4,8 @@ Regex AI is a tool for generating Regex patterns from natural language built on 
 
 <img width="1280" alt="Snag_43317e0" src="https://user-images.githubusercontent.com/61338150/216146810-128e3ff2-768f-4597-a7df-2f399ae7ab91.png">
 
+<img width="1280" alt="Snag_24ced" src="https://user-images.githubusercontent.com/61338150/216497691-4cc6742b-36c5-478d-afcc-f8ab6c45ca04.png">
+
 ## Technologies
 
 This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
