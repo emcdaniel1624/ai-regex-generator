@@ -98,7 +98,7 @@ const Home: NextPage = () => {
                   :
                   <div className="flex gap-3 mt-3">
                     <div className="text-white">
-                      Was this response helpful?
+                      Was this response accurate?
                     </div>
                     <button onClick={() => void handleFeedback(true)}
                             className="hover:underline text-white rounded-full transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110 active:scale-100">
